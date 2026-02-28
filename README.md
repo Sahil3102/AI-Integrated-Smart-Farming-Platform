@@ -65,7 +65,6 @@ smart_agriculture_platform/
 
 ### Prerequisites
 - Python 3.9+
-- PostgreSQL 12+
 - pip
 
 ### Step 1: Clone the Repository
