@@ -246,13 +246,10 @@ python manage.py migrate
 4. Run tests
 5. Submit a pull request
 
-## License
-
-This project is licensed under the MIT License.
 
 ## Support
 
-For support, email support@smartagri.ai or create an issue in the repository.
+For support, email sahilhingu31@gmail.com or create an issue in the repository.
 
 ## Acknowledgments
 
