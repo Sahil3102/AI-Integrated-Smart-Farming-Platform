@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block title %}Weather Forecast - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Weather Forecast</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Get accurate 7-day weather forecasts with agricultural advice for better farm planning.
+            </p>
+        </div>
+        
+        <!-- Location Search -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <form method="get" class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <input type="text" name="location" value="{{ location }}" 
+                        class="form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500"
+                        placeholder="Enter your location">
+                </div>
+                <div>
+                    <select name="days" class="form-select px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500">
+                        <option value="3">3 Days</option>
+                        <option value="7" selected>7 Days</option>
+                        <option value="14">14 Days</option>
+                    </select>
+                </div>
+                <button type="submit" class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                    <i class="fas fa-search mr-2"></i>Get Forecast
+                </button>
+            </form>
+        </div>
+        
+        {% if forecast %}
+        <!-- Current Weather -->
+        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-lg p-8 text-white mb-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <h2 class="text-3xl font-bold">{{ location }}</h2>
+                    <p class="text-blue-100">{{ current.weather_condition }}</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-6xl font-bold">{{ current.temperature }}°C</p>
+                    <p class="text-blue-100">Feels like {{ current.feels_like }}°C</p>
+                </div>
+                <div class="grid grid-cols-2 gap-6 mt-6 md:mt-0">
+                    <div class="text-center">
+                        <i class="fas fa-tint text-2xl mb-2"></i>
+                        <p class="text-blue-100">Humidity</p>
+                        <p class="font-semibold">{{ current.humidity }}%</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-wind text-2xl mb-2"></i>
+                        <p class="text-blue-100">Wind</p>
+                        <p class="font-semibold">{{ current.wind_speed }} km/h</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Forecast Summary -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Forecast Summary</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <p class="text-gray-500 text-sm">Avg High</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ forecast.summary.avg_temperature_max }}°C</p>
+                </div>
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <p class="text-gray-500 text-sm">Avg Low</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ forecast.summary.avg_temperature_min }}°C</p>
+                </div>
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <p class="text-gray-500 text-sm">Total Rainfall</p>
+                    <p class="text-2xl font-bold text-blue-600">{{ forecast.summary.total_rainfall }}mm</p>
+                </div>
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <p class="text-gray-500 text-sm">Rainy Days</p>
+                    <p class="text-2xl font-bold text-blue-600">{{ forecast.summary.rainy_days }}</p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 bg-amber-50 rounded-xl">
+                <p class="text-amber-800">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    <strong>Overall Trend:</strong> {{ forecast.overall_trend }}
+                </p>
+            </div>
+        </div>
+        
+        <!-- 7-Day Forecast -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-6">7-Day Forecast</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                {% for day in forecast.daily_forecasts %}
+                <div class="text-center p-4 border rounded-xl hover:shadow-md transition">
+                    <p class="text-gray-500 text-sm">{{ day.day_name }}</p>
+                    <p class="text-gray-400 text-xs">{{ day.date }}</p>
+                    <div class="my-3">
+                        {% if 'Rain' in day.weather_condition %}
+                            <i class="fas fa-cloud-rain text-3xl text-blue-500"></i>
+                        {% elif 'Cloud' in day.weather_condition %}
+                            <i class="fas fa-cloud text-3xl text-gray-500"></i>
+                        {% elif 'Sunny' in day.weather_condition or 'Clear' in day.weather_condition %}
+                            <i class="fas fa-sun text-3xl text-yellow-500"></i>
+                        {% else %}
+                            <i class="fas fa-cloud-sun text-3xl text-orange-500"></i>
+                        {% endif %}
+                    </div>
+                    <p class="text-sm font-medium text-gray-700">{{ day.weather_condition }}</p>
+                    <div class="mt-2">
+                        <span class="text-lg font-bold">{{ day.temperature_max|floatformat:0 }}°</span>
+                        <span class="text-gray-400">/</span>
+                        <span class="text-gray-500">{{ day.temperature_min|floatformat:0 }}°</span>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-500">
+                        <i class="fas fa-tint mr-1"></i>{{ day.humidity }}%
+                        {% if day.rainfall_amount > 0 %}
+                            <span class="ml-2 text-blue-500">
+                                <i class="fas fa-umbrella mr-1"></i>{{ day.rainfall_amount|floatformat:1 }}mm
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Agricultural Advice -->
+        <div class="bg-green-50 rounded-2xl shadow-lg p-6">
+            <h3 class="text-xl font-semibold text-green-800 mb-4">
+                <i class="fas fa-tractor mr-2"></i>Agricultural Advice
+            </h3>
+            <ul class="space-y-3">
+                {% for advice in forecast.agricultural_advice %}
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                    <span class="text-gray-700">{{ advice }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <div class="bg-white rounded-2xl shadow-lg p-12 text-center">
+            <i class="fas fa-cloud-sun text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Get Weather Forecast</h3>
+            <p class="text-gray-500">Enter your location above to get accurate weather forecasts.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

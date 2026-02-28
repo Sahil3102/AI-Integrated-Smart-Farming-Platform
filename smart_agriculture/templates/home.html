@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+
+{% block title %}Smart AI Agriculture Decision Platform{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="gradient-bg text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    Smart AI Agriculture<br>Decision Platform
+                </h1>
+                <p class="text-xl text-green-100 mb-8">
+                    Empowering farmers with AI-driven insights for disease detection, 
+                    price prediction, soil analysis, and weather forecasting.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="{% url 'register' %}" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition">
+                        Get Started
+                    </a>
+                    <a href="{% url 'about' %}" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="hidden lg:block">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-white opacity-10 rounded-3xl transform rotate-3"></div>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl p-8">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center">
+                                <i class="fas fa-seedling text-4xl mb-2"></i>
+                                <p class="text-2xl font-bold">{{ total_farmers }}+</p>
+                                <p class="text-sm text-green-100">Farmers</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center">
+                                <i class="fas fa-shopping-cart text-4xl mb-2"></i>
+                                <p class="text-2xl font-bold">{{ total_buyers }}+</p>
+                                <p class="text-sm text-green-100">Buyers</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center">
+                                <i class="fas fa-leaf text-4xl mb-2"></i>
+                                <p class="text-2xl font-bold">{{ total_crops }}+</p>
+                                <p class="text-sm text-green-100">Crops Listed</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center">
+                                <i class="fas fa-check-circle text-4xl mb-2"></i>
+                                <p class="text-2xl font-bold">{{ total_orders }}+</p>
+                                <p class="text-sm text-green-100">Orders Completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our AI-Powered Services</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Leverage the power of artificial intelligence to make informed decisions 
+                and maximize your agricultural productivity.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Disease Detection -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-virus text-2xl text-red-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Disease Detection</h3>
+                <p class="text-gray-600 text-sm mb-4">
+                    Upload crop leaf images and get instant AI-powered disease diagnosis with treatment recommendations.
+                </p>
+                <a href="{% url 'ai_models:disease_detection' %}" class="text-green-600 font-medium hover:text-green-700">
+                    Try Now <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+            
+            <!-- Price Prediction -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-chart-line text-2xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Price Prediction</h3>
+                <p class="text-gray-600 text-sm mb-4">
+                    Predict crop prices based on location, season, and weather conditions to maximize profits.
+                </p>
+                <a href="{% url 'ai_models:price_prediction' %}" class="text-green-600 font-medium hover:text-green-700">
+                    Try Now <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+            
+            <!-- Soil Analysis -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-flask text-2xl text-amber-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Soil Analysis</h3>
+                <p class="text-gray-600 text-sm mb-4">
+                    Get personalized crop recommendations based on your soil's NPK values and pH level.
+                </p>
+                <a href="{% url 'ai_models:soil_recommendation' %}" class="text-green-600 font-medium hover:text-green-700">
+                    Try Now <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+            
+            <!-- Weather Forecast -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-cloud-sun text-2xl text-cyan-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Weather Forecast</h3>
+                <p class="text-gray-600 text-sm mb-4">
+                    Get accurate 7-day weather forecasts with agricultural advice for better planning.
+                </p>
+                <a href="{% url 'ai_models:weather_forecast' %}" class="text-green-600 font-medium hover:text-green-700">
+                    Try Now <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-20 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">How It Works</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Simple steps to get started with our AI-powered agricultural platform.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white text-2xl font-bold">1</span>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Register</h3>
+                <p class="text-gray-600 text-sm">Create your account as a farmer or buyer.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white text-2xl font-bold">2</span>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Access AI Tools</h3>
+                <p class="text-gray-600 text-sm">Use our AI services for crop management.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white text-2xl font-bold">3</span>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">List/Buy Crops</h3>
+                <p class="text-gray-600 text-sm">List your crops or buy from farmers.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white text-2xl font-bold">4</span>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Grow Business</h3>
+                <p class="text-gray-600 text-sm">Build reputation and grow your business.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Crops -->
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center mb-12">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Featured Crops</h2>
+                <p class="text-gray-600">Fresh crops listed by our trusted farmers.</p>
+            </div>
+            <a href="{% url 'buyer:browse_crops' %}" class="text-green-600 font-medium hover:text-green-700">
+                View All <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for crop in featured_crops %}
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    {% if crop.image %}
+                        <img src="{{ crop.image.url }}" alt="{{ crop.name }}" class="w-full h-48 object-cover">
+                    {% else %}
+                        <div class="w-full h-48 bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-seedling text-6xl text-green-400"></i>
+                        </div>
+                    {% endif %}
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-semibold text-gray-800">{{ crop.name }}</h3>
+                            {% if crop.is_organic %}
+                                <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Organic</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4">{{ crop.farmer.name }} • {{ crop.location|default:"Location N/A" }}</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-2xl font-bold text-green-600">₹{{ crop.price_per_kg }}</p>
+                                <p class="text-gray-400 text-xs">per kg</p>
+                            </div>
+                            <a href="{% url 'buyer:crop_detail' crop.id %}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-span-3 text-center py-12">
+                    <i class="fas fa-leaf text-6xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">No crops available at the moment.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 gradient-bg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Transform Your Agriculture?
+        </h2>
+        <p class="text-green-100 text-lg mb-8">
+            Join thousands of farmers and buyers using SmartAgri AI to make better decisions.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{% url 'register' %}?role=farmer" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition">
+                Join as Farmer
+            </a>
+            <a href="{% url 'register' %}?role=buyer" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition">
+                Join as Buyer
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

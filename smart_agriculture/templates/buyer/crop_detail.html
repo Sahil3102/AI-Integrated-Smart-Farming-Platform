@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ crop.name }} - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Image -->
+            <div>
+                {% if crop.image %}
+                    <img src="{{ crop.image.url }}" alt="{{ crop.name }}" class="w-full rounded-2xl shadow-lg">
+                {% else %}
+                    <div class="w-full h-96 bg-green-100 rounded-2xl shadow-lg flex items-center justify-center">
+                        <i class="fas fa-seedling text-8xl text-green-400"></i>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Details -->
+            <div>
+                <div class="bg-white rounded-2xl shadow-lg p-8">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-800">{{ crop.name }}</h1>
+                            {% if crop.variety %}
+                                <p class="text-gray-500">{{ crop.variety }}</p>
+                            {% endif %}
+                        </div>
+                        {% if crop.is_organic %}
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                                <i class="fas fa-leaf mr-1"></i>Organic
+                            </span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="flex items-center mb-6">
+                        <div class="flex items-center mr-6">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span class="font-semibold">{{ farmer_reputation|floatformat:1 }}</span>
+                            <span class="text-gray-400 ml-1">({{ farmer_sales }} sales)</span>
+                        </div>
+                        <div class="flex items-center text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-2"></i>{{ crop.location|default:"Location N/A" }}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <p class="text-4xl font-bold text-green-600">₹{{ crop.price_per_kg }}</p>
+                        <p class="text-gray-400">per kg</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-gray-500 text-sm">Available Quantity</p>
+                            <p class="text-xl font-semibold">{{ crop.quantity_kg }} kg</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-gray-500 text-sm">Quality Grade</p>
+                            <p class="text-xl font-semibold">{{ crop.quality_grade|default:"N/A" }}</p>
+                        </div>
+                    </div>
+                    
+                    {% if crop.description %}
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-gray-800 mb-2">Description</h3>
+                        <p class="text-gray-600">{{ crop.description }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Farmer Info -->
+                    <div class="bg-green-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800">{{ crop.farmer.name }}</p>
+                                <p class="text-sm text-gray-500">Verified Farmer</p>
+                            </div>
+                            <a href="{% url 'buyer:farmer_profile' crop.farmer.id %}" class="ml-auto text-green-600 hover:text-green-700">
+                                View Profile <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="flex space-x-4">
+                        <a href="{% url 'buyer:buy_crop' crop.id %}" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold text-center hover:bg-green-700 transition">
+                            <i class="fas fa-shopping-cart mr-2"></i>Buy Now
+                        </a>
+                        {% if user.is_authenticated and user.role == 'buyer' %}
+                            {% if in_wishlist %}
+                                <form method="post" action="{% url 'buyer:remove_wishlist' crop.id %}" class="flex-shrink-0">
+                                    {% csrf_token %}
+                                    <button type="submit" class="w-12 h-12 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form method="post" action="{% url 'buyer:add_wishlist' crop.id %}" class="flex-shrink-0">
+                                    {% csrf_token %}
+                                    <button type="submit" class="w-12 h-12 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- More from Farmer -->
+        {% if farmer_other_crops %}
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">More from {{ crop.farmer.name }}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for other_crop in farmer_other_crops %}
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    {% if other_crop.image %}
+                        <img src="{{ other_crop.image.url }}" alt="{{ other_crop.name }}" class="w-full h-40 object-cover">
+                    {% else %}
+                        <div class="w-full h-40 bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-seedling text-4xl text-green-400"></i>
+                        </div>
+                    {% endif %}
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800">{{ other_crop.name }}</h3>
+                        <p class="text-green-600 font-bold">₹{{ other_crop.price_per_kg }}/kg</p>
+                        <a href="{% url 'buyer:crop_detail' other_crop.id %}" class="text-green-600 text-sm hover:text-green-700">View Details</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

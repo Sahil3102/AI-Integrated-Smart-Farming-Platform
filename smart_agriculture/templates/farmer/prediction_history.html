@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Prediction History - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">AI Prediction History</h1>
+            <p class="text-gray-500">View your past AI predictions</p>
+        </div>
+        
+        {% if predictions %}
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Date</th>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Type</th>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Input</th>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Result</th>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pred in predictions %}
+                        <tr class="border-t">
+                            <td class="py-4 px-6">{{ pred.created_at|date:"M d, Y H:i" }}</td>
+                            <td class="py-4 px-6">
+                                <span class="px-3 py-1 rounded-full text-xs font-medium
+                                    {% if pred.prediction_type == 'disease' %}bg-red-100 text-red-700
+                                    {% elif pred.prediction_type == 'price' %}bg-blue-100 text-blue-700
+                                    {% elif pred.prediction_type == 'soil' %}bg-amber-100 text-amber-700
+                                    {% else %}bg-gray-100 text-gray-700{% endif %}">
+                                    {{ pred.get_prediction_type_display }}
+                                </span>
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-600">
+                                {% if pred.prediction_type == 'disease' %}
+                                    Image uploaded
+                                {% elif pred.prediction_type == 'price' %}
+                                    {{ pred.input_data.crop|default:"N/A" }}
+                                {% elif pred.prediction_type == 'soil' %}
+                                    N:{{ pred.input_data.N|default:"N/A" }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="py-4 px-6 text-sm">
+                                {% if pred.prediction_type == 'disease' %}
+                                    {{ pred.output_data.disease_name|default:"N/A"|truncatechars:30 }}
+                                {% elif pred.prediction_type == 'price' %}
+                                    ₹{{ pred.output_data.predicted_price|default:"N/A" }}
+                                {% elif pred.prediction_type == 'soil' %}
+                                    {{ pred.output_data.recommended_crop|default:"N/A" }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="py-4 px-6">
+                                {% if pred.confidence_score %}
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                                            <div class="bg-green-500 h-2 rounded-full" style="width: {{ pred.confidence_score }}%"></div>
+                                        </div>
+                                        <span class="text-sm">{{ pred.confidence_score|floatformat:0 }}%</span>
+                                    </div>
+                                {% else %}
+                                    <span class="text-gray-400">-</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="bg-white rounded-2xl shadow-lg p-12 text-center">
+            <i class="fas fa-brain text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">No Predictions Yet</h3>
+            <p class="text-gray-500 mb-6">Start using our AI tools to see your prediction history.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="{% url 'ai_models:disease_detection' %}" class="bg-red-100 text-red-700 px-4 py-2 rounded-lg hover:bg-red-200 transition">
+                    <i class="fas fa-virus mr-2"></i>Disease Detection
+                </a>
+                <a href="{% url 'ai_models:price_prediction' %}" class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg hover:bg-blue-200 transition">
+                    <i class="fas fa-rupee-sign mr-2"></i>Price Prediction
+                </a>
+                <a href="{% url 'ai_models:soil_recommendation' %}" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-lg hover:bg-amber-200 transition">
+                    <i class="fas fa-flask mr-2"></i>Soil Analysis
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

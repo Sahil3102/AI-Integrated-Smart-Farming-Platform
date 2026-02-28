@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+
+{% block title %}Farmer Dashboard - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-lg min-h-screen hidden md:block">
+            <div class="p-6">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">{{ user.name }}</p>
+                        <p class="text-sm text-gray-500">Farmer</p>
+                    </div>
+                </div>
+                
+                <nav class="space-y-2">
+                    <a href="{% url 'farmer:dashboard' %}" class="sidebar-link active flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-home w-5"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{% url 'farmer:crop_list' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-seedling w-5"></i>
+                        <span>My Crops</span>
+                    </a>
+                    <a href="{% url 'farmer:order_list' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-shopping-cart w-5"></i>
+                        <span>Orders</span>
+                    </a>
+                    <a href="{% url 'farmer:sales_history' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-chart-line w-5"></i>
+                        <span>Sales History</span>
+                    </a>
+                    <a href="{% url 'farmer:prediction_history' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-brain w-5"></i>
+                        <span>AI Predictions</span>
+                    </a>
+                    <hr class="my-4">
+                    <p class="px-4 text-xs font-semibold text-gray-400 uppercase">AI Tools</p>
+                    <a href="{% url 'ai_models:disease_detection' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-virus w-5"></i>
+                        <span>Disease Detection</span>
+                    </a>
+                    <a href="{% url 'ai_models:price_prediction' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-rupee-sign w-5"></i>
+                        <span>Price Prediction</span>
+                    </a>
+                    <a href="{% url 'ai_models:soil_recommendation' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-flask w-5"></i>
+                        <span>Soil Analysis</span>
+                    </a>
+                    <a href="{% url 'ai_models:weather_forecast' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-cloud-sun w-5"></i>
+                        <span>Weather</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Farmer Dashboard</h1>
+                <p class="text-gray-500">Welcome back, {{ user.name }}!</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Crops</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ total_crops }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-seedling text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Orders</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ total_orders }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shopping-cart text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Sales</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ total_sales }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chart-line text-amber-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Reputation Score</p>
+                            <p class="text-3xl font-bold text-green-600">{{ reputation_score|floatformat:1 }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-star text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Recent Crops -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">My Crops</h2>
+                        <a href="{% url 'farmer:crop_list' %}" class="text-green-600 hover:text-green-700 text-sm">
+                            View All <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                    
+                    {% if crops %}
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left py-3 text-gray-600 font-medium">Crop</th>
+                                        <th class="text-left py-3 text-gray-600 font-medium">Price</th>
+                                        <th class="text-left py-3 text-gray-600 font-medium">Quantity</th>
+                                        <th class="text-left py-3 text-gray-600 font-medium">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for crop in crops %}
+                                        <tr class="border-b">
+                                            <td class="py-3">
+                                                <div class="flex items-center">
+                                                    {% if crop.image %}
+                                                        <img src="{{ crop.image.url }}" alt="" class="w-10 h-10 rounded-lg object-cover mr-3">
+                                                    {% else %}
+                                                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                                            <i class="fas fa-seedling text-green-600"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                    <span class="font-medium">{{ crop.name }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="py-3">₹{{ crop.price_per_kg }}/kg</td>
+                                            <td class="py-3">{{ crop.quantity_kg }} kg</td>
+                                            <td class="py-3">
+                                                <span class="px-3 py-1 rounded-full text-xs font-medium
+                                                    {% if crop.status == 'available' %}bg-green-100 text-green-700
+                                                    {% elif crop.status == 'sold' %}bg-gray-100 text-gray-700
+                                                    {% else %}bg-amber-100 text-amber-700{% endif %}">
+                                                    {{ crop.status|title }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-8">
+                            <i class="fas fa-seedling text-4xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500">No crops listed yet.</p>
+                            <a href="{% url 'farmer:crop_add' %}" class="text-green-600 hover:text-green-700 mt-2 inline-block">
+                                Add your first crop
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Pending Orders -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Pending Orders</h2>
+                        <a href="{% url 'farmer:order_list' %}" class="text-green-600 hover:text-green-700 text-sm">
+                            View All <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                    
+                    {% if pending_orders %}
+                        <div class="space-y-4">
+                            {% for order in pending_orders %}
+                                <div class="border rounded-lg p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <p class="font-medium text-gray-800">{{ order.crop.name }}</p>
+                                            <p class="text-sm text-gray-500">{{ order.buyer.name }}</p>
+                                        </div>
+                                        <span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">
+                                            {{ order.status|title }}
+                                        </span>
+                                    </div>
+                                    <div class="mt-2 flex justify-between items-center">
+                                        <p class="text-sm text-gray-600">{{ order.quantity_kg }} kg</p>
+                                        <p class="font-semibold text-green-600">₹{{ order.total_amount }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-8">
+                            <i class="fas fa-check-circle text-4xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500">No pending orders</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- AI Tools Quick Access -->
+            <div class="mt-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">AI Tools</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="{% url 'ai_models:disease_detection' %}" class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-virus text-red-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800">Disease Detection</h3>
+                        <p class="text-sm text-gray-500 mt-1">Upload leaf images for diagnosis</p>
+                    </a>
+                    
+                    <a href="{% url 'ai_models:price_prediction' %}" class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-rupee-sign text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800">Price Prediction</h3>
+                        <p class="text-sm text-gray-500 mt-1">Predict crop prices</p>
+                    </a>
+                    
+                    <a href="{% url 'ai_models:soil_recommendation' %}" class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-flask text-amber-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800">Soil Analysis</h3>
+                        <p class="text-sm text-gray-500 mt-1">Get crop recommendations</p>
+                    </a>
+                    
+                    <a href="{% url 'ai_models:weather_forecast' %}" class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-cloud-sun text-cyan-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800">Weather Forecast</h3>
+                        <p class="text-sm text-gray-500 mt-1">7-day weather forecast</p>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

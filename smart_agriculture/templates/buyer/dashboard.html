@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}Buyer Dashboard - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-lg min-h-screen hidden md:block">
+            <div class="p-6">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">{{ user.name }}</p>
+                        <p class="text-sm text-gray-500">Buyer</p>
+                    </div>
+                </div>
+                
+                <nav class="space-y-2">
+                    <a href="{% url 'buyer:dashboard' %}" class="sidebar-link active flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-home w-5"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{% url 'buyer:browse_crops' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-search w-5"></i>
+                        <span>Browse Crops</span>
+                    </a>
+                    <a href="{% url 'buyer:order_history' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-shopping-bag w-5"></i>
+                        <span>My Orders</span>
+                    </a>
+                    <a href="{% url 'buyer:wishlist' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-heart w-5"></i>
+                        <span>Wishlist</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Buyer Dashboard</h1>
+                <p class="text-gray-500">Welcome back, {{ user.name }}!</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Orders</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ total_orders }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shopping-bag text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Pending Orders</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ pending_orders|length }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-clock text-amber-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Spent</p>
+                            <p class="text-3xl font-bold text-gray-800">₹{{ total_spent|floatformat:0 }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-rupee-sign text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Wishlist</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ wishlist|length }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heart text-red-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Recommended Crops -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800">Recommended Crops</h2>
+                            <a href="{% url 'buyer:browse_crops' %}" class="text-green-600 hover:text-green-700 text-sm">
+                                Browse All <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {% for crop in recommended_crops %}
+                                <div class="border rounded-lg p-4 card-hover">
+                                    <div class="flex items-start space-x-4">
+                                        {% if crop.image %}
+                                            <img src="{{ crop.image.url }}" alt="" class="w-20 h-20 rounded-lg object-cover">
+                                        {% else %}
+                                            <div class="w-20 h-20 bg-green-100 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-seedling text-green-600 text-2xl"></i>
+                                            </div>
+                                        {% endif %}
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold text-gray-800">{{ crop.name }}</h3>
+                                            <p class="text-sm text-gray-500">{{ crop.farmer.name }}</p>
+                                            <div class="flex items-center mt-1">
+                                                <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                                <span class="text-xs text-gray-500 ml-1">{{ crop.farmer.reputation_score|floatformat:1 }}</span>
+                                            </div>
+                                            <div class="flex justify-between items-center mt-2">
+                                                <p class="font-bold text-green-600">₹{{ crop.price_per_kg }}/kg</p>
+                                                <a href="{% url 'buyer:crop_detail' crop.id %}" class="text-sm text-green-600 hover:text-green-700">
+                                                    View
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <div class="col-span-2 text-center py-8">
+                                    <i class="fas fa-seedling text-4xl text-gray-300 mb-4"></i>
+                                    <p class="text-gray-500">No crops available at the moment.</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Side Panel -->
+                <div class="space-y-6">
+                    <!-- Pending Orders -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Pending Orders</h2>
+                        {% if pending_orders %}
+                            <div class="space-y-3">
+                                {% for order in pending_orders %}
+                                    <div class="border rounded-lg p-3">
+                                        <p class="font-medium text-gray-800">{{ order.crop.name }}</p>
+                                        <p class="text-sm text-gray-500">{{ order.quantity_kg }} kg</p>
+                                        <span class="inline-block mt-2 px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">
+                                            {{ order.status|title }}
+                                        </span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-gray-500 text-sm">No pending orders</p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Wishlist Preview -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-semibold text-gray-800">Wishlist</h2>
+                            <a href="{% url 'buyer:wishlist' %}" class="text-green-600 text-sm">View All</a>
+                        </div>
+                        {% if wishlist %}
+                            <div class="space-y-3">
+                                {% for item in wishlist %}
+                                    <div class="flex items-center space-x-3">
+                                        {% if item.crop.image %}
+                                            <img src="{{ item.crop.image.url }}" alt="" class="w-12 h-12 rounded-lg object-cover">
+                                        {% else %}
+                                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-seedling text-green-600"></i>
+                                            </div>
+                                        {% endif %}
+                                        <div class="flex-1">
+                                            <p class="font-medium text-gray-800">{{ item.crop.name }}</p>
+                                            <p class="text-sm text-green-600">₹{{ item.crop.price_per_kg }}/kg</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-gray-500 text-sm">Your wishlist is empty</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

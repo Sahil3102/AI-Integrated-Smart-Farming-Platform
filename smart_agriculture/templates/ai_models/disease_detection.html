@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block title %}Disease Detection - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Plant Disease Detection</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Upload a photo of your crop leaf and our AI will detect any diseases 
+                and provide treatment recommendations.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Upload Section -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">Upload Image</h2>
+                
+                <form method="post" enctype="multipart/form-data" class="space-y-6">
+                    {% csrf_token %}
+                    
+                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-green-500 transition cursor-pointer" id="drop-zone">
+                        <input type="file" name="image" id="image-input" accept="image/*" class="hidden" required>
+                        <i class="fas fa-cloud-upload-alt text-5xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 mb-2">Drag and drop your image here</p>
+                        <p class="text-gray-400 text-sm">or click to browse</p>
+                        <p class="text-gray-400 text-xs mt-2">Supports JPG, PNG (max 5MB)</p>
+                    </div>
+                    
+                    <div id="preview-container" class="hidden">
+                        <p class="text-sm text-gray-600 mb-2">Preview:</p>
+                        <img id="image-preview" class="max-h-64 rounded-lg mx-auto">
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                        <i class="fas fa-search mr-2"></i>Analyze Image
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="space-y-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-info-circle text-blue-500 mr-2"></i>How to Take a Good Photo
+                    </h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                            <span>Ensure good lighting - natural daylight works best</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                            <span>Focus on the affected area of the leaf</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                            <span>Include both healthy and diseased parts for comparison</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                            <span>Keep the camera steady and close to the leaf</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                            <span>Avoid shadows and reflections</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-leaf text-green-500 mr-2"></i>Supported Crops
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-sm text-gray-600">
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Apple</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Blueberry</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Cherry</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Corn</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Grape</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Orange</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Peach</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Pepper</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Potato</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Raspberry</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Soybean</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Squash</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Strawberry</span>
+                        <span><i class="fas fa-check text-green-500 mr-1"></i>Tomato</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        {% if result %}
+        <div class="mt-8 bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Detection Results</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    {% if image_url %}
+                        <img src="{{ image_url }}" alt="Uploaded image" class="rounded-xl w-full">
+                    {% endif %}
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <p class="text-gray-500 text-sm mb-1">Detected Disease</p>
+                        <h3 class="text-2xl font-bold text-gray-800">{{ result.disease_name }}</h3>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <p class="text-gray-500 text-sm mb-1">Confidence Score</p>
+                        <div class="flex items-center">
+                            <div class="flex-1 bg-gray-200 rounded-full h-4 mr-4">
+                                <div class="bg-green-500 h-4 rounded-full" style="width: {{ result.confidence_score }}%"></div>
+                            </div>
+                            <span class="text-2xl font-bold text-green-600">{{ result.confidence_score }}%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <p class="text-gray-500 text-sm mb-1">Severity Level</p>
+                        <span class="px-4 py-2 rounded-lg text-sm font-medium
+                            {% if result.severity_level == 'low' %}bg-green-100 text-green-700
+                            {% elif result.severity_level == 'medium' %}bg-yellow-100 text-yellow-700
+                            {% elif result.severity_level == 'high' %}bg-orange-100 text-orange-700
+                            {% else %}bg-red-100 text-red-700{% endif %}">
+                            {{ result.severity_level|title }}
+                        </span>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-xl p-6">
+                        <p class="text-blue-600 text-sm mb-2">
+                            <i class="fas fa-medkit mr-2"></i>Treatment Recommendation
+                        </p>
+                        <p class="text-gray-700">{{ result.treatment_suggestion }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const imageInput = document.getElementById('image-input');
+    const previewContainer = document.getElementById('preview-container');
+    const imagePreview = document.getElementById('image-preview');
+    
+    dropZone.addEventListener('click', () => imageInput.click());
+    
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-green-500');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('border-green-500');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-green-500');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            imageInput.files = files;
+            showPreview(files[0]);
+        }
+    });
+    
+    imageInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            showPreview(e.target.files[0]);
+        }
+    });
+    
+    function showPreview(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imagePreview.src = e.target.result;
+            previewContainer.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,414 @@
+INFO 2026-02-11 22:15:07,261 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:14:53,547 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:15:25,419 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\smart_agriculture\settings.py changed, reloading.
+INFO 2026-02-12 13:15:31,838 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:15:42,495 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:16:46,999 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:17:38,844 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\buyer\views.py changed, reloading.
+INFO 2026-02-12 13:17:44,806 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:17:51,310 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\analytics\views.py changed, reloading.
+INFO 2026-02-12 13:17:55,903 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:18:03,265 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\buyer\models.py changed, reloading.
+INFO 2026-02-12 13:18:03,408 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\buyer\models.py changed, reloading.
+INFO 2026-02-12 13:18:10,266 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:18:10,850 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:19:00,999 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:20:49,847 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:21:15,300 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:23:40,673 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:28:25,594 autoreload Watching for file changes with StatReloader
+INFO 2026-02-12 13:43:07,739 autoreload Watching for file changes with StatReloader
+INFO 2026-02-17 14:33:10,880 autoreload Watching for file changes with StatReloader
+INFO 2026-02-17 14:39:28,497 autoreload Watching for file changes with StatReloader
+INFO 2026-02-17 14:40:07,434 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\smart_agriculture\settings.py changed, reloading.
+INFO 2026-02-17 14:40:13,451 autoreload Watching for file changes with StatReloader
+INFO 2026-02-17 14:41:36,014 basehttp "GET / HTTP/1.1" 200 17763
+INFO 2026-02-17 14:41:56,388 basehttp "GET / HTTP/1.1" 200 17763
+WARNING 2026-02-17 14:41:57,302 log Not Found: /favicon.ico
+WARNING 2026-02-17 14:41:57,302 basehttp "GET /favicon.ico HTTP/1.1" 404 3484
+INFO 2026-02-17 14:42:17,413 basehttp "GET / HTTP/1.1" 200 17763
+INFO 2026-02-17 14:42:19,733 basehttp "GET /about/ HTTP/1.1" 200 19404
+INFO 2026-02-17 14:42:31,948 basehttp "GET /accounts/login/ HTTP/1.1" 200 10932
+INFO 2026-02-17 14:42:50,557 basehttp "GET /accounts/register/ HTTP/1.1" 200 12540
+INFO 2026-02-17 14:43:34,440 basehttp "POST /accounts/register/ HTTP/1.1" 200 13029
+INFO 2026-02-17 14:44:03,007 basehttp "POST /accounts/register/ HTTP/1.1" 200 13029
+INFO 2026-02-17 14:44:30,066 basehttp "POST /accounts/register/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:44:30,082 basehttp "GET /accounts/login/ HTTP/1.1" 200 11229
+INFO 2026-02-17 14:45:00,878 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+ERROR 2026-02-17 14:45:01,312 log Internal Server Error: /buyer/dashboard/
+Traceback (most recent call last):
+  File "C:\python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\python310\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\python310\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\python310\lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "C:\python310\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\python310\lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\python310\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\python310\lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\python310\lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\python310\lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+ERROR 2026-02-17 14:45:01,327 basehttp "GET /buyer/dashboard/ HTTP/1.1" 500 172531
+ERROR 2026-02-17 14:45:27,352 log Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\python310\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\python310\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\python310\lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "C:\python310\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\python310\lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\python310\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\python310\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\python310\lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\python310\lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\python310\lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+ERROR 2026-02-17 14:45:27,355 basehttp "GET /accounts/login/ HTTP/1.1" 500 167295
+WARNING 2026-02-17 14:45:33,545 log Forbidden (CSRF token from POST incorrect.): /accounts/register/
+WARNING 2026-02-17 14:45:33,586 basehttp "POST /accounts/register/ HTTP/1.1" 403 2518
+WARNING 2026-02-17 14:45:38,257 log Forbidden (CSRF token from POST incorrect.): /accounts/register/
+WARNING 2026-02-17 14:45:38,300 basehttp "POST /accounts/register/ HTTP/1.1" 403 2518
+INFO 2026-02-17 14:46:36,359 basehttp "GET /api/soil-recommendation/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:46:36,377 basehttp "GET /accounts/login/?next=/api/soil-recommendation/ HTTP/1.1" 200 10932
+INFO 2026-02-17 14:46:47,561 basehttp "GET / HTTP/1.1" 200 17763
+INFO 2026-02-17 14:47:41,961 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\buyer\views.py changed, reloading.
+INFO 2026-02-17 14:47:47,351 autoreload Watching for file changes with StatReloader
+INFO 2026-02-17 14:49:14,261 basehttp "GET /buyer/dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:49:14,395 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:49:14,628 basehttp "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11224
+INFO 2026-02-17 14:49:22,743 basehttp "GET /buyer/dashboard/ HTTP/1.1" 200 15319
+INFO 2026-02-17 14:49:28,330 basehttp "GET /buyer/browse/ HTTP/1.1" 200 10436
+INFO 2026-02-17 14:49:33,495 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:49:33,543 basehttp "GET /buyer/dashboard/ HTTP/1.1" 200 15035
+INFO 2026-02-17 14:49:39,535 basehttp "GET /buyer/orders/ HTTP/1.1" 200 8739
+INFO 2026-02-17 14:49:42,009 basehttp "GET /buyer/browse/ HTTP/1.1" 200 10436
+INFO 2026-02-17 14:50:01,955 basehttp "GET /buyer/browse/?search=wheat&location=mumbai&min_price=40&max_price=80 HTTP/1.1" 200 10451
+INFO 2026-02-17 14:50:04,377 basehttp "GET / HTTP/1.1" 200 19004
+INFO 2026-02-17 14:50:15,922 basehttp "GET /accounts/profile/ HTTP/1.1" 200 11093
+INFO 2026-02-17 14:50:33,186 basehttp "GET /accounts/profile/edit/ HTTP/1.1" 200 14241
+INFO 2026-02-17 14:50:38,658 basehttp "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:50:38,675 basehttp "GET / HTTP/1.1" 200 18059
+INFO 2026-02-17 14:50:41,496 basehttp "GET /accounts/register/ HTTP/1.1" 200 12540
+INFO 2026-02-17 14:51:39,960 basehttp "POST /accounts/register/ HTTP/1.1" 200 13032
+INFO 2026-02-17 14:52:15,289 basehttp "POST /accounts/register/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:52:15,306 basehttp "GET /accounts/login/ HTTP/1.1" 200 11229
+INFO 2026-02-17 14:52:35,619 basehttp "POST /accounts/login/ HTTP/1.1" 200 10956
+INFO 2026-02-17 14:52:48,701 basehttp "POST /accounts/login/ HTTP/1.1" 200 10956
+INFO 2026-02-17 14:54:56,051 basehttp "POST /accounts/login/ HTTP/1.1" 200 10956
+INFO 2026-02-17 14:55:04,800 basehttp "POST /accounts/login/ HTTP/1.1" 200 10956
+INFO 2026-02-17 14:55:09,705 basehttp "GET /accounts/register/ HTTP/1.1" 200 12540
+INFO 2026-02-17 14:55:38,854 basehttp "POST /accounts/register/ HTTP/1.1" 200 13024
+INFO 2026-02-17 14:56:07,075 basehttp "POST /accounts/register/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:56:07,092 basehttp "GET /accounts/login/ HTTP/1.1" 200 11229
+INFO 2026-02-17 14:56:28,723 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:56:28,806 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 19035
+INFO 2026-02-17 14:56:47,511 basehttp "GET /farmer/crops/ HTTP/1.1" 200 9056
+INFO 2026-02-17 14:56:51,229 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:56:51,287 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 14:56:53,692 basehttp "GET /farmer/sales-history/ HTTP/1.1" 200 9336
+INFO 2026-02-17 14:56:56,510 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:56:56,553 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 14:56:58,037 basehttp "GET /farmer/predictions/ HTTP/1.1" 200 9343
+INFO 2026-02-17 14:57:00,074 basehttp "GET /api/disease-detection/ HTTP/1.1" 200 14979
+INFO 2026-02-17 14:57:06,177 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:57:06,235 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 14:57:09,277 basehttp "GET /api/price-prediction/ HTTP/1.1" 200 12373
+INFO 2026-02-17 14:57:26,532 basehttp "POST /api/price-prediction/ HTTP/1.1" 200 17052
+INFO 2026-02-17 14:57:33,864 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:57:33,914 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+ERROR 2026-02-17 14:57:36,447 log Internal Server Error: /api/weather-forecast/
+Traceback (most recent call last):
+  File "C:\python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\python310\lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\python310\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\python310\lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\views.py", line 221, in get
+    current = get_current_weather(location)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py", line 271, in get_current_weather
+    return weather_model.get_current_weather(location)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py", line 225, in get_current_weather
+    condition = random.choice([c for c in pattern['conditions'] if 'Rain' in c or 'Thunderstorm' in c])
+  File "C:\python310\lib\random.py", line 378, in choice
+    return seq[self._randbelow(len(seq))]
+IndexError: list index out of range
+ERROR 2026-02-17 14:57:36,464 basehttp "GET /api/weather-forecast/ HTTP/1.1" 500 103763
+INFO 2026-02-17 14:57:42,338 basehttp "GET /api/soil-recommendation/ HTTP/1.1" 200 14957
+INFO 2026-02-17 14:57:48,785 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:57:48,829 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 14:57:50,640 basehttp "GET /api/price-prediction/ HTTP/1.1" 200 12373
+INFO 2026-02-17 14:57:53,429 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:57:53,479 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 14:58:00,942 basehttp "GET /api/soil-recommendation/ HTTP/1.1" 200 14957
+INFO 2026-02-17 14:58:03,982 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:58:04,027 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 14:58:06,253 basehttp "GET /api/weather-forecast/ HTTP/1.1" 200 20275
+INFO 2026-02-17 14:58:10,448 basehttp "GET / HTTP/1.1" 200 19004
+INFO 2026-02-17 14:58:13,109 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 14:58:13,159 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+ERROR 2026-02-17 14:58:14,923 log Internal Server Error: /api/weather-forecast/
+Traceback (most recent call last):
+  File "C:\python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\python310\lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\python310\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\python310\lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\views.py", line 218, in get
+    forecast = get_weather_forecast(location, days)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py", line 258, in get_weather_forecast
+    return weather_model.get_forecast(location, days)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py", line 139, in get_forecast
+    forecast = self._generate_daily_forecast(forecast_date, location, base_temp)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py", line 86, in _generate_daily_forecast
+    condition = random.choice([c for c in pattern['conditions'] if 'Rain' in c or 'Thunderstorm' in c])
+  File "C:\python310\lib\random.py", line 378, in choice
+    return seq[self._randbelow(len(seq))]
+IndexError: list index out of range
+ERROR 2026-02-17 14:58:14,925 basehttp "GET /api/weather-forecast/ HTTP/1.1" 500 107826
+ERROR 2026-02-17 14:58:19,575 log Internal Server Error: /api/weather-forecast/
+Traceback (most recent call last):
+  File "C:\python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\python310\lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\python310\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\python310\lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\views.py", line 218, in get
+    forecast = get_weather_forecast(location, days)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py", line 258, in get_weather_forecast
+    return weather_model.get_forecast(location, days)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py", line 139, in get_forecast
+    forecast = self._generate_daily_forecast(forecast_date, location, base_temp)
+  File "C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py", line 86, in _generate_daily_forecast
+    condition = random.choice([c for c in pattern['conditions'] if 'Rain' in c or 'Thunderstorm' in c])
+  File "C:\python310\lib\random.py", line 378, in choice
+    return seq[self._randbelow(len(seq))]
+IndexError: list index out of range
+ERROR 2026-02-17 14:58:19,575 basehttp "GET /api/weather-forecast/ HTTP/1.1" 500 106559
+INFO 2026-02-17 14:59:41,197 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\ml_models\weather_forecast.py changed, reloading.
+INFO 2026-02-17 14:59:45,542 autoreload Watching for file changes with StatReloader
+INFO 2026-02-17 15:00:43,957 basehttp "GET /api/weather-forecast/ HTTP/1.1" 200 21190
+INFO 2026-02-17 15:00:58,384 basehttp "GET /api/weather-forecast/?location=Navi+Mumbai&days=3 HTTP/1.1" 200 16123
+INFO 2026-02-17 15:01:27,038 basehttp "GET /api/weather-forecast/?location=Spiti&days=7 HTTP/1.1" 200 19995
+INFO 2026-02-17 15:01:40,885 basehttp "GET / HTTP/1.1" 200 19004
+INFO 2026-02-17 15:01:49,756 basehttp "GET / HTTP/1.1" 200 19004
+INFO 2026-02-17 15:01:51,464 basehttp "GET /about/ HTTP/1.1" 200 20645
+INFO 2026-02-17 15:01:52,517 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:01:52,581 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:02:02,261 basehttp "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:02:02,263 basehttp "GET / HTTP/1.1" 200 18059
+INFO 2026-02-17 15:02:26,499 basehttp "GET / HTTP/1.1" 200 17763
+WARNING 2026-02-17 15:02:27,418 log Not Found: /favicon.ico
+WARNING 2026-02-17 15:02:27,419 basehttp "GET /favicon.ico HTTP/1.1" 404 3484
+INFO 2026-02-17 15:02:34,855 basehttp "GET /accounts/login/ HTTP/1.1" 200 10932
+INFO 2026-02-17 15:02:43,519 basehttp "POST /accounts/login/ HTTP/1.1" 200 10956
+INFO 2026-02-17 15:02:55,642 basehttp "GET /accounts/login/ HTTP/1.1" 200 10932
+INFO 2026-02-17 15:02:58,465 basehttp "GET / HTTP/1.1" 200 17763
+INFO 2026-02-17 15:03:12,638 basehttp "GET /accounts/register/ HTTP/1.1" 200 12540
+INFO 2026-02-17 15:03:17,942 basehttp "GET / HTTP/1.1" 200 17763
+INFO 2026-02-17 15:03:27,826 basehttp "GET /accounts/login/ HTTP/1.1" 200 10932
+INFO 2026-02-17 15:03:57,942 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:03:58,004 basehttp "GET /buyer/dashboard/ HTTP/1.1" 200 15319
+INFO 2026-02-17 15:04:05,005 basehttp "GET /buyer/browse/ HTTP/1.1" 200 10436
+INFO 2026-02-17 15:04:10,248 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:04:10,301 basehttp "GET /buyer/dashboard/ HTTP/1.1" 200 15035
+INFO 2026-02-17 15:04:11,697 basehttp "GET /buyer/orders/ HTTP/1.1" 200 8739
+INFO 2026-02-17 15:04:15,519 basehttp "GET /buyer/browse/ HTTP/1.1" 200 10436
+INFO 2026-02-17 15:04:17,583 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:04:17,635 basehttp "GET /buyer/dashboard/ HTTP/1.1" 200 15035
+INFO 2026-02-17 15:04:19,152 basehttp "GET /buyer/wishlist/ HTTP/1.1" 200 8726
+INFO 2026-02-17 15:04:31,795 basehttp "GET /accounts/profile/edit/ HTTP/1.1" 200 14241
+INFO 2026-02-17 15:04:41,744 basehttp "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:04:41,755 basehttp "GET / HTTP/1.1" 200 18059
+INFO 2026-02-17 15:04:44,562 basehttp "GET /accounts/login/ HTTP/1.1" 200 10932
+INFO 2026-02-17 15:04:55,642 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:04:55,692 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 19035
+INFO 2026-02-17 15:05:04,432 basehttp "GET /farmer/crops/ HTTP/1.1" 200 9056
+INFO 2026-02-17 15:05:07,406 basehttp "GET /farmer/crops/add/ HTTP/1.1" 200 13574
+INFO 2026-02-17 15:05:11,023 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:05:11,089 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:05:12,960 basehttp "GET /farmer/orders/ HTTP/1.1" 200 8533
+INFO 2026-02-17 15:05:15,706 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:05:15,788 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:05:17,352 basehttp "GET /farmer/sales-history/ HTTP/1.1" 200 9336
+INFO 2026-02-17 15:05:20,319 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:05:20,369 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:05:22,070 basehttp "GET /farmer/predictions/ HTTP/1.1" 200 10340
+INFO 2026-02-17 15:05:25,334 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:05:25,418 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:05:27,053 basehttp "GET /api/disease-detection/ HTTP/1.1" 200 14979
+INFO 2026-02-17 15:05:36,524 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:05:36,571 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:05:38,534 basehttp "GET /api/price-prediction/ HTTP/1.1" 200 12373
+INFO 2026-02-17 15:05:44,170 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:05:44,231 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:05:45,849 basehttp "GET /api/soil-recommendation/ HTTP/1.1" 200 14957
+INFO 2026-02-17 15:05:48,838 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:05:48,887 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:05:50,634 basehttp "GET /api/weather-forecast/ HTTP/1.1" 200 20462
+INFO 2026-02-17 15:06:00,650 basehttp "GET /api/weather-forecast/?location=mumbai&days=7 HTTP/1.1" 200 21183
+INFO 2026-02-17 15:06:07,132 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:06:07,198 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 18751
+INFO 2026-02-17 15:06:09,266 basehttp "GET /farmer/crops/ HTTP/1.1" 200 9056
+INFO 2026-02-17 15:06:11,416 basehttp "GET /farmer/crops/add/ HTTP/1.1" 200 13574
+INFO 2026-02-17 15:06:59,105 basehttp "POST /farmer/crops/add/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:06:59,142 basehttp "GET /farmer/crops/ HTTP/1.1" 200 11170
+INFO 2026-02-17 15:07:02,614 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:07:02,677 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 20708
+INFO 2026-02-17 15:07:04,625 basehttp "GET /farmer/crops/ HTTP/1.1" 200 10878
+INFO 2026-02-17 15:07:23,315 basehttp "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:07:23,328 basehttp "GET / HTTP/1.1" 200 18059
+INFO 2026-02-17 15:08:57,091 basehttp "GET /accounts/login/ HTTP/1.1" 200 10932
+INFO 2026-02-17 15:09:00,494 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-02-17 15:09:00,551 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 20992
+INFO 2026-02-17 15:10:26,750 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 22278
+INFO 2026-02-17 20:28:59,910 autoreload C:\python310\Lib\site-packages\urllib3\filepost.py changed, reloading.
+INFO 2026-02-28 02:30:57,770 autoreload Watching for file changes with StatReloader
+INFO 2026-02-28 02:36:31,950 autoreload Watching for file changes with StatReloader
+INFO 2026-02-28 02:38:27,659 basehttp "GET /accounts/register/ HTTP/1.1" 200 22441
+WARNING 2026-02-28 02:38:30,821 log Not Found: /favicon.ico
+WARNING 2026-02-28 02:38:30,828 basehttp "GET /favicon.ico HTTP/1.1" 404 3484
+INFO 2026-02-28 02:38:42,560 basehttp "GET /accounts/login/ HTTP/1.1" 200 20833
+INFO 2026-02-28 02:39:02,698 basehttp "POST /accounts/login/ HTTP/1.1" 200 20862
+INFO 2026-02-28 02:39:15,189 basehttp "POST /accounts/login/ HTTP/1.1" 200 20862
+INFO 2026-02-28 02:39:20,410 basehttp "GET /accounts/register/ HTTP/1.1" 200 22441
+INFO 2026-02-28 02:39:58,535 basehttp "POST /accounts/register/ HTTP/1.1" 302 0
+INFO 2026-02-28 02:39:58,644 basehttp "GET /accounts/login/ HTTP/1.1" 200 21102
+INFO 2026-02-28 02:40:09,360 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-02-28 02:40:09,715 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 28962
+INFO 2026-02-28 02:40:27,845 basehttp "GET /farmer/crops/ HTTP/1.1" 200 19029
+INFO 2026-02-28 02:40:31,428 basehttp "GET /farmer/crops/add/ HTTP/1.1" 200 23547
+INFO 2026-02-28 02:40:35,380 basehttp "GET / HTTP/1.1" 200 28977
+INFO 2026-02-28 02:40:38,628 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-28 02:40:38,927 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 28712
+INFO 2026-02-28 02:41:13,806 basehttp "GET /api/price-prediction/ HTTP/1.1" 200 22346
+INFO 2026-02-28 02:41:17,305 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-28 02:41:17,526 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 28712
+INFO 2026-02-28 02:41:20,289 basehttp "GET /api/weather-forecast/ HTTP/1.1" 200 30747
+INFO 2026-02-28 02:41:32,037 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-28 02:41:32,416 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 28712
+WARNING 2026-02-28 02:46:13,434 log Not Found: /api/chat/
+WARNING 2026-02-28 02:46:13,474 basehttp "POST /api/chat/ HTTP/1.1" 404 5054
+WARNING 2026-02-28 02:46:30,725 log Not Found: /api/chat/
+WARNING 2026-02-28 02:46:30,863 basehttp "POST /api/chat/ HTTP/1.1" 404 5054
+WARNING 2026-02-28 02:48:21,999 log Not Found: /api/chat/
+WARNING 2026-02-28 02:48:21,999 basehttp "POST /api/chat/ HTTP/1.1" 404 5054
+INFO 2026-02-28 02:48:39,377 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\chatbot_views.py changed, reloading.
+INFO 2026-02-28 02:48:45,520 autoreload Watching for file changes with StatReloader
+WARNING 2026-02-28 02:49:27,275 log Not Found: /api/chat/
+WARNING 2026-02-28 02:49:27,417 basehttp "POST /api/chat/ HTTP/1.1" 404 5054
+WARNING 2026-02-28 02:51:19,585 log Not Found: /api/chat/
+WARNING 2026-02-28 02:51:19,586 basehttp "POST /api/chat/ HTTP/1.1" 404 5054
+INFO 2026-02-28 02:52:44,487 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 28550
+WARNING 2026-02-28 02:53:04,351 log Not Found: /api/chat/
+WARNING 2026-02-28 02:53:04,366 basehttp "POST /api/chat/ HTTP/1.1" 404 5054
+INFO 2026-02-28 13:01:55,391 autoreload Watching for file changes with StatReloader
+INFO 2026-02-28 13:02:20,695 basehttp "GET / HTTP/1.1" 200 27300
+WARNING 2026-02-28 13:02:22,772 log Not Found: /favicon.ico
+WARNING 2026-02-28 13:02:22,775 basehttp "GET /favicon.ico HTTP/1.1" 404 3484
+INFO 2026-02-28 13:02:25,499 basehttp "GET /accounts/login/ HTTP/1.1" 200 20469
+INFO 2026-02-28 13:02:31,545 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-02-28 13:02:31,714 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 30579
+WARNING 2026-02-28 13:02:44,799 log Not Found: /api/chat/
+WARNING 2026-02-28 13:02:44,803 basehttp "POST /api/chat/ HTTP/1.1" 404 5054
+INFO 2026-02-28 13:06:58,425 autoreload C:\Users\HP\OneDrive\Desktop\smart_agriculture_platform\smart_agriculture\ai_models\urls.py changed, reloading.
+INFO 2026-02-28 13:07:01,323 autoreload Watching for file changes with StatReloader
+INFO 2026-02-28 13:07:42,997 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 30323
+ERROR 2026-02-28 13:07:50,070 log Internal Server Error: /api/chat/
+ERROR 2026-02-28 13:07:50,078 basehttp "POST /api/chat/ HTTP/1.1" 500 227
+INFO 2026-02-28 13:26:26,885 autoreload Watching for file changes with StatReloader
+INFO 2026-02-28 13:26:56,534 basehttp "GET / HTTP/1.1" 200 28619
+WARNING 2026-02-28 13:26:58,471 log Not Found: /favicon.ico
+WARNING 2026-02-28 13:26:58,474 basehttp "GET /favicon.ico HTTP/1.1" 404 3484
+INFO 2026-02-28 13:27:03,491 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-28 13:27:03,587 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 30323
+ERROR 2026-02-28 13:27:08,382 chatbot_views DEBUG CHATBOT ERROR: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+ERROR 2026-02-28 13:27:08,386 log Internal Server Error: /api/chat/
+ERROR 2026-02-28 13:27:08,388 basehttp "POST /api/chat/ HTTP/1.1" 500 227
+INFO 2026-02-28 13:27:24,051 basehttp "GET /farmer/crops/ HTTP/1.1" 200 20493
+INFO 2026-02-28 13:27:29,164 basehttp "GET / HTTP/1.1" 200 28619
+INFO 2026-02-28 13:27:31,652 basehttp "GET /accounts/profile/edit/ HTTP/1.1" 200 24206
+INFO 2026-02-28 13:27:39,414 basehttp "GET /accounts/profile/ HTTP/1.1" 200 21305
+INFO 2026-02-28 13:27:43,927 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2026-02-28 13:27:44,019 basehttp "GET /farmer/dashboard/ HTTP/1.1" 200 30323

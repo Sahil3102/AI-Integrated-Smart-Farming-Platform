@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <!-- Profile Header -->
+            <div class="gradient-bg p-8 text-white">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 md:mb-0 md:mr-6">
+                        {% if profile.avatar %}
+                            <img src="{{ profile.avatar.url }}" alt="" class="w-24 h-24 rounded-full object-cover">
+                        {% else %}
+                            <i class="fas fa-user text-4xl text-green-600"></i>
+                        {% endif %}
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h1 class="text-3xl font-bold">{{ user.name }}</h1>
+                        <p class="text-green-100">{{ user.get_role_display }}</p>
+                        {% if user.role == 'farmer' %}
+                            <div class="mt-2 flex items-center justify-center md:justify-start">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span class="font-semibold">{{ user.reputation_score|floatformat:1 }}</span>
+                                <span class="text-green-100 ml-1">Reputation Score</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Details -->
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Profile Information</h2>
+                    <a href="{% url 'profile_edit' %}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                        <i class="fas fa-edit mr-2"></i>Edit Profile
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Email</p>
+                        <p class="font-medium text-gray-800">{{ user.email }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Phone</p>
+                        <p class="font-medium text-gray-800">{{ user.phone|default:"Not provided" }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Location</p>
+                        <p class="font-medium text-gray-800">{{ user.location|default:"Not provided" }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Member Since</p>
+                        <p class="font-medium text-gray-800">{{ user.date_joined|date:"F d, Y" }}</p>
+                    </div>
+                </div>
+                
+                {% if profile.bio %}
+                <div class="mt-6">
+                    <p class="text-gray-500 text-sm mb-1">Bio</p>
+                    <p class="text-gray-700">{{ profile.bio }}</p>
+                </div>
+                {% endif %}
+                
+                <!-- Role-specific info -->
+                {% if user.role == 'farmer' %}
+                <hr class="my-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Farm Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Farm Size</p>
+                        <p class="font-medium text-gray-800">{{ profile.farm_size|default:"N/A" }} acres</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Farm Type</p>
+                        <p class="font-medium text-gray-800">{{ profile.farm_type|default:"N/A" }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Experience</p>
+                        <p class="font-medium text-gray-800">{{ profile.years_of_experience|default:"N/A" }} years</p>
+                    </div>
+                </div>
+                {% elif user.role == 'buyer' %}
+                <hr class="my-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Business Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Company Name</p>
+                        <p class="font-medium text-gray-800">{{ profile.company_name|default:"N/A" }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Business Type</p>
+                        <p class="font-medium text-gray-800">{{ profile.business_type|default:"N/A" }}</p>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Address -->
+                {% if profile.address %}
+                <hr class="my-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Address</h3>
+                <p class="text-gray-700">{{ profile.address }}</p>
+                <p class="text-gray-700">{{ profile.city|default:"" }}{% if profile.city and profile.state %}, {% endif %}{{ profile.state|default:"" }}</p>
+                <p class="text-gray-700">{{ profile.country|default:"" }} {{ profile.postal_code|default:"" }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

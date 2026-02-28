@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+
+{% block title %}Analytics Dashboard - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-lg min-h-screen hidden md:block">
+            <div class="p-6">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-chart-bar text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">{{ user.name }}</p>
+                        <p class="text-sm text-gray-500">Analyst</p>
+                    </div>
+                </div>
+                
+                <nav class="space-y-2">
+                    <a href="{% url 'analytics:dashboard' %}" class="sidebar-link active flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-home w-5"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{% url 'core_dashboard:system_logs' %}" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700">
+                        <i class="fas fa-list w-5"></i>
+                        <span>System Logs</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Analytics Dashboard</h1>
+                <p class="text-gray-500">Platform-wide insights and metrics</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Users</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ total_users }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-users text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-green-600"><i class="fas fa-arrow-up mr-1"></i>{{ farmers_count }}</span>
+                        <span class="text-gray-400 ml-2">farmers</span>
+                        <span class="text-green-600 ml-4"><i class="fas fa-arrow-up mr-1"></i>{{ buyers_count }}</span>
+                        <span class="text-gray-400 ml-2">buyers</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Crops</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ total_crops }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-seedling text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-green-600">{{ available_crops }}</span>
+                        <span class="text-gray-400 ml-2">available</span>
+                        <span class="text-gray-600 ml-4">{{ sold_crops }}</span>
+                        <span class="text-gray-400 ml-2">sold</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Orders</p>
+                            <p class="text-3xl font-bold text-gray-800">{{ total_orders }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shopping-cart text-amber-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-green-600">{{ completed_orders }}</span>
+                        <span class="text-gray-400 ml-2">completed</span>
+                        <span class="text-amber-600 ml-4">{{ pending_orders }}</span>
+                        <span class="text-gray-400 ml-2">pending</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Revenue</p>
+                            <p class="text-3xl font-bold text-green-600">₹{{ total_revenue|floatformat:0 }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-rupee-sign text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-500">
+                        From {{ completed_orders }} completed orders
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Row 1 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Disease Detection Accuracy</h2>
+                    <canvas id="diseaseAccuracyChart" height="250"></canvas>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Prediction Usage</h2>
+                    <canvas id="predictionUsageChart" height="250"></canvas>
+                </div>
+            </div>
+            
+            <!-- Charts Row 2 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Top Farmers by Sales</h2>
+                    <canvas id="farmerSalesChart" height="250"></canvas>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Soil Data Statistics</h2>
+                    <canvas id="soilStatsChart" height="250"></canvas>
+                </div>
+            </div>
+            
+            <!-- AI Model Metrics -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">AI Model Performance</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="text-left py-3 text-gray-600 font-medium">Model</th>
+                                <th class="text-left py-3 text-gray-600 font-medium">Version</th>
+                                <th class="text-left py-3 text-gray-600 font-medium">Accuracy</th>
+                                <th class="text-left py-3 text-gray-600 font-medium">Total Predictions</th>
+                                <th class="text-left py-3 text-gray-600 font-medium">Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for metric in model_metrics %}
+                                <tr class="border-b">
+                                    <td class="py-3">{{ metric.get_model_type_display }}</td>
+                                    <td class="py-3">{{ metric.model_version }}</td>
+                                    <td class="py-3">
+                                        <div class="flex items-center">
+                                            <div class="w-24 bg-gray-200 rounded-full h-2 mr-3">
+                                                <div class="bg-green-500 h-2 rounded-full" style="width: {{ metric.accuracy }}%"></div>
+                                            </div>
+                                            <span>{{ metric.accuracy|floatformat:1 }}%</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3">{{ metric.total_predictions }}</td>
+                                    <td class="py-3 text-sm text-gray-500">{{ metric.last_updated|date:"M d, Y" }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5" class="py-8 text-center text-gray-500">No model metrics available</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="text-left py-3 text-gray-600 font-medium">Activity</th>
+                                <th class="text-left py-3 text-gray-600 font-medium">User</th>
+                                <th class="text-left py-3 text-gray-600 font-medium">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for activity in recent_activity %}
+                                <tr class="border-b">
+                                    <td class="py-3">{{ activity.get_activity_type_display }}</td>
+                                    <td class="py-3">{{ activity.user.name|default:"Anonymous" }}</td>
+                                    <td class="py-3 text-sm text-gray-500">{{ activity.created_at|timesince }} ago</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="3" class="py-8 text-center text-gray-500">No recent activity</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script>
+    // Disease Accuracy Chart
+    fetch('{% url "analytics:disease_accuracy_chart" %}')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('diseaseAccuracyChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        },
+                    },
+                },
+            });
+        });
+    
+    // Prediction Usage Chart
+    fetch('{% url "analytics:prediction_usage_chart" %}')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('predictionUsageChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+            });
+        });
+    
+    // Farmer Sales Chart
+    fetch('{% url "analytics:farmer_sales_chart" %}')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('farmerSalesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        },
+                    },
+                },
+            });
+        });
+    
+    // Soil Statistics Chart
+    fetch('{% url "analytics:soil_statistics_chart" %}')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('soilStatsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                },
+            });
+        });
+</script>
+{% endblock %}

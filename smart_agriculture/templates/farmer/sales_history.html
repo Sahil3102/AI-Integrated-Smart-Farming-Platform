@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Sales History - SmartAgri AI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Sales History</h1>
+            <p class="text-gray-500">Track your sales and revenue</p>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <p class="text-gray-500 text-sm">Total Sales</p>
+                <p class="text-3xl font-bold text-gray-800">{{ total_sales }}</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <p class="text-gray-500 text-sm">Total Revenue</p>
+                <p class="text-3xl font-bold text-green-600">₹{{ total_revenue|floatformat:0 }}</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <p class="text-gray-500 text-sm">Total Quantity Sold</p>
+                <p class="text-3xl font-bold text-gray-800">{{ total_quantity|floatformat:0 }} kg</p>
+            </div>
+        </div>
+        
+        {% if sales %}
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Date</th>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Crop</th>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Buyer</th>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Quantity</th>
+                            <th class="text-left py-4 px-6 text-gray-600 font-medium">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sale in sales %}
+                        <tr class="border-t">
+                            <td class="py-4 px-6">{{ sale.sale_date|date:"M d, Y" }}</td>
+                            <td class="py-4 px-6 font-medium">{{ sale.crop_name }}</td>
+                            <td class="py-4 px-6">{{ sale.buyer_name }}</td>
+                            <td class="py-4 px-6">{{ sale.quantity_sold }} kg</td>
+                            <td class="py-4 px-6 font-semibold text-green-600">₹{{ sale.amount_received }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="bg-white rounded-2xl shadow-lg p-12 text-center">
+            <i class="fas fa-chart-line text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">No Sales Yet</h3>
+            <p class="text-gray-500">Your sales history will appear here once you complete orders.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
