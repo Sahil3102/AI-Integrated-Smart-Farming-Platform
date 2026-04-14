@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: AI-Integrated-Smart-Farming-Platform
+    env: python
+    plan: free
+    buildCommand: |
+      python --version
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: gunicorn your_project.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13
